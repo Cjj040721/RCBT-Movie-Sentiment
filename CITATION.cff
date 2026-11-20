@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "RCBT Movie Sentiment"
+authors:
+  - family-names: Cao
+    given-names: Junjia
+year: 2026
+version: 1.0.0
+license: MIT
+url: "https://github.com/Cjj040721/RCBT-Movie-Sentiment"
+abstract: "A sequence-preserving RoBERTa-CNN-BiLSTM-Transformer sentiment classifier with a reproducible training workflow."

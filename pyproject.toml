@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rcbt-movie-sentiment"
+version = "1.0.0"
+description = "A sequence-preserving RoBERTa-CNN-BiLSTM-Transformer classifier"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Junjia Cao"}]
+dependencies = [
+  "numpy>=1.26,<3",
+  "torch>=2.3,<3",
+  "transformers>=4.40,<5",
+  "datasets>=2.19,<5",
+  "scikit-learn>=1.4,<2",
+  "tqdm>=4.66,<5",
+]
+
+[project.scripts]
+rcbt-train = "rcbt.train:main"
+rcbt-predict = "rcbt.predict:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
