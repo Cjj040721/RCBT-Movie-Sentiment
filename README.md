@@ -9,6 +9,7 @@ A 2026 rewrite of the architecture introduced in Junjia Cao's IEEE ISPCEM 2024 p
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)](#quickstart)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.3%2B-EE4C2C)](#architecture)
 [![Transformers](https://img.shields.io/badge/Transformers-4.x-6E56CF)](#quickstart)
+[![Smoke](https://github.com/Cjj040721/RCBT-Movie-Sentiment/actions/workflows/smoke.yml/badge.svg)](https://github.com/Cjj040721/RCBT-Movie-Sentiment/actions/workflows/smoke.yml)
 [![Licence](https://img.shields.io/badge/Licence-MIT-2AA887)](LICENSE)
 
 [Architecture](#architecture) · [Quickstart](#quickstart) · [Training Protocol](#training-protocol) · [Verification](#verification)

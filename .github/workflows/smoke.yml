@@ -1,0 +1,51 @@
+name: smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  tiny-training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install package
+        run: pip install -e .
+      - name: Run tiny end-to-end training
+        run: |
+          rcbt-train \
+            --model-name sshleifer/tiny-distilroberta-base \
+            --train-limit 64 \
+            --validation-limit 32 \
+            --test-limit 32 \
+            --epochs 1 \
+            --batch-size 8 \
+            --max-length 64 \
+            --cnn-channels 16 \
+            --lstm-hidden-size 32 \
+            --transformer-layers 1 \
+            --device cpu \
+            --output outputs/ci-smoke
+      - name: Verify checkpoint inference
+        run: rcbt-predict --checkpoint outputs/ci-smoke/best.pt --text "An ambitious story with excellent performances and a memorable ending."
+      - name: Check training artifacts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          metrics = json.loads(Path('outputs/ci-smoke/metrics.json').read_text())
+          history = json.loads(Path('outputs/ci-smoke/history.json').read_text())
+          assert metrics['train_examples'] == 64
+          assert metrics['validation_examples'] == 32
+          assert metrics['test_examples'] == 32
+          assert history
+          assert Path('outputs/ci-smoke/best.pt').is_file()
+          print('Tiny training and inference artifacts verified.')
+          PY
